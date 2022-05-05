@@ -24,6 +24,10 @@ public class Userposjava {//usuario do postgresql
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	@Override
+	public String toString() {
+		return "Userposjava [id=" + id + ", nome=" + nome + ", email=" + email + "]";
+	}
 	
 	
 	
