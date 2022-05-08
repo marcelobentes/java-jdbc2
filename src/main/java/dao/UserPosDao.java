@@ -19,7 +19,7 @@ public class UserPosDao {
 		connection = SingleConnection.getConnection();
 	}
 	
-	public void salvar ( Userposjava userposjava) {
+	public void salvar ( Userposjava userposjava) {//metedo de salvar no banco
 		
 		try {
 			
@@ -88,7 +88,7 @@ public class UserPosDao {
 		
 		return retorno;
 	}
-	
+	//metedo de atuazilar o banco
 	public void atualizar (Userposjava userposjava) {
 		
 		try {
@@ -107,6 +107,28 @@ public class UserPosDao {
 			}
 			e.printStackTrace();
 		}
+	}
+	
+	public void deletar (Long id) {
+		
+		try {
+			
+			String sql = "delete from userposjava where id = "+ id;
+			PreparedStatement deleta = connection.prepareStatement(sql);
+			deleta.execute();
+			connection.commit();
+			
+		} catch (Exception e) {
+			try {
+				connection.rollback();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+			
+		e.printStackTrace();
+		
+		}
+		
 	}
 
 }
