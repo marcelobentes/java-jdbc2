@@ -23,12 +23,12 @@ public class UserPosDao {
 		
 		try {
 			
-			String sql = "insert into userposjava (id, nome, email) values (?,?,?)";
+			String sql = "insert into userposjava (nome, email) values (?,?)";
 			PreparedStatement insert = connection.prepareStatement(sql);/* Faz o insert no banco*/
 			/*Inserindo os dados na tabela*/
-			insert.setLong(1, userposjava.getId());
-			insert.setString(2, userposjava.getNome());
-			insert.setString(3, userposjava.getEmail());
+			
+			insert.setString(1, userposjava.getNome());
+			insert.setString(2, userposjava.getEmail());
 			insert.execute(); /*executar no banco.*/
 			connection.commit();//salva no banco
 			
@@ -89,6 +89,24 @@ public class UserPosDao {
 		return retorno;
 	}
 	
-	
+	public void atualizar (Userposjava userposjava) {
+		
+		try {
+			
+		
+		String sql = "update userposjava set nome = ? where  id = " + userposjava.getId();//montando o sql
+		PreparedStatement atualizarjdbc = connection.prepareStatement(sql);//instancia para atualizar
+		atualizarjdbc.setString(1, userposjava.getNome());//informando a posição para setar
+		atualizarjdbc.execute();
+		connection.commit();
+		} catch (Exception e) {
+			try {
+				connection.rollback();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+			e.printStackTrace();
+		}
+	}
 
 }
